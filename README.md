@@ -1,76 +1,71 @@
-# grunt-html2json
+# grunt-htmljson
 
-As a intensive client-side javascript template user, I alwasy try to find the best way to load the templates.
-And I found it is a very good practise that compiling the templates into on single JSON file.
-
-You can get one single JSON file and use JSON.parse convert it into a dict.
-With the dict, you can easily pick up the the template you wish to render, which saves you a lot of trouble by getting html file one by one.
-
-```javascript
-/*
-* tpl_str might be something looks like:
-* {
-*    "h2": "<h2 class="title">{{title}}!</h2>",
-*	  "p": "<p class="warnning">{{msg}}</p>"
-* }
-*/
-var tpl_str = ... // get the JSON content from some where, 
-                  // either from requre.js text plugin or a AJAX call.
-var tpl = JSON.parse(tpl_str);
-
-//render to: <h2 class="title">Hello World~!</h2>
-Mustache.render(tpl.h2, {title: 'Hello World~!'});
-//render to "<p class="warnning">Alert!</p>"
-Mustache.render(tpl.p, {msg: 'Alert!'});
-```
+> JSON for yo html templates
 
 ## Getting Started
-Install this grunt plugin next to your project's [grunt.js gruntfile][getting_started] with: `npm install grunt-html2json`
+This plugin requires Grunt `~0.4.1`
 
-Then add this line to your project's `grunt.js` gruntfile:
+If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
-```javascript
-grunt.loadNpmTasks('grunt-html2json');
+```shell
+npm install grunt-htmljson --save-dev
 ```
 
-[grunt]: http://gruntjs.com/
-[getting_started]: https://github.com/gruntjs/grunt/blob/master/docs/getting_started.md
+Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
 
-## Documentation
-Example Code
-```javascript
+```js
+grunt.loadNpmTasks('grunt-htmljson');
+```
+
+## The "htmljson" task
+
+### Overview
+In your project's Gruntfile, add a section named `htmljson` to the data object passed into `grunt.initConfig()`.
+
+### Options
+
+#### options.separator
+Type: `String|Number|Null`
+Default value: `null`
+
+A string value that is used to do something with whatever.
+
+### Usage Examples
+
+#### Default Options
+In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
+
+```js
 grunt.initConfig({
-  html2json: {
-    dist: {
-       src: ['src/*.txt', 'src/*.html'],
-       dest: 'dist/templates.json'
-    }
+  htmljson: {
+    src: ['src/templates/**/*.html'],
+    dest: 'dist/templates/combined.json'
   }
-});
-
+})
 ```
 
-With this task, you can compile all `txt` and `html` files in `src` into `dist/templates.json`.
+#### Custom Options
+In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
 
-
-You might also want to trigger the compiled process by watching the file change.
-Append following ine in the grunt.initConfig list.
-```javascript
-watch: {
-  files: '<config:html2json.dist.src>',
-  tasks: 'default'
-}
+```js
+grunt.initConfig({
+  htmljson: {
+    src: ['src/templates/**/*.html'],
+    dest: 'dist/templates/combined.json',
+    options: {
+      separator: 2
+    }
+  },
+})
 ```
 
+## Todo
+- Write some tests
 
 ## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [grunt][grunt].
+In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
-+ 0.1
-++ Well, it works (testcase is yet to be done).
-++ JSON is pretty print by default. Later will add an option to switch.
-
-## License
-Copyright (c) 2012 Tom Tang  
-Licensed under the MIT license.
+```
+0.1.0 -- Initial release
+```
