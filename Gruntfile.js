@@ -1,8 +1,8 @@
 /*
  * grunt-htmljson
- * https://github.com/jon/htmljson
+ * https://github.com/jonjaques/htmljson
  *
- * Copyright (c) 2013 Jon Jaques
+ * Copyright (c) 2013 Jon Jaques, Tom Tang
  * Licensed under the MIT license.
  */
 
@@ -60,7 +60,7 @@ module.exports = function(grunt) {
 
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
   // plugin's task(s), then test the result.
-  grunt.registerTask('test', ['clean', 'htmljson', 'nodeunit']);
+  grunt.registerTask('test', ['clean', 'htmljson']);
 
   // By default, lint and run all tests.
   grunt.registerTask('default', ['jshint', 'test']);
